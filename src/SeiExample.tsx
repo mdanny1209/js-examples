@@ -12,7 +12,7 @@ const SeiExample = () => {
 		<SeiWalletProvider chainConfiguration={selectedChainConfigUrls}>
 			<div className='app'>
 				<div className='appHeader'>
-					<h2>@sei-js/react examples</h2>
+					<h2>OIN TESTNET PARTICIPATION CLAIM</h2>
 				</div>
 				<div className='appContent'>
 					<ChainInfo />

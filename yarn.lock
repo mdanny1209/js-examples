@@ -554,6 +554,29 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@keplr-wallet/provider@^0.12.21":
+  version "0.12.21"
+  resolved "https://registry.yarnpkg.com/@keplr-wallet/provider/-/provider-0.12.21.tgz#0541a0a62b933c1e9c148a98ffebd8b5b4a7196f"
+  integrity sha512-RzFH5WSZyF+7MjelEFiax0F4fc5ByQbhuV/WbL+9h2MedCWvhXHRG1IUs2v0vHIilQ/fTEww3KbTbB1FVifQdA==
+  dependencies:
+    "@keplr-wallet/router" "0.12.21"
+    "@keplr-wallet/types" "0.12.21"
+    buffer "^6.0.3"
+    deepmerge "^4.2.2"
+    long "^4.0.0"
+
+"@keplr-wallet/router@0.12.21":
+  version "0.12.21"
+  resolved "https://registry.yarnpkg.com/@keplr-wallet/router/-/router-0.12.21.tgz#4d2368ecbffc7fa8f36544c6f2e4e9103fd80736"
+  integrity sha512-7pRULOodGO7s75KdiaioRv0fUko7LjjdkWq+y9zNsJaYWZgfPhaqZCJ4Nv0fxmgcdTr7kjdYkpUlM8sN1Imygg==
+
+"@keplr-wallet/types@0.12.21":
+  version "0.12.21"
+  resolved "https://registry.yarnpkg.com/@keplr-wallet/types/-/types-0.12.21.tgz#2124f93f7cd13bf078775f25f0edef11d7936f79"
+  integrity sha512-VkWQ9iWZioY9z7pj8/wD0AP1T0reYz7tlRgW/etvpZOiKtKNA9eH5Khd4us30ps/P6pAj+H53GdjERC15U3tpQ==
+  dependencies:
+    long "^4.0.0"
+
 "@keplr-wallet/types@^0.11.41":
   version "0.11.44"
   resolved "https://registry.yarnpkg.com/@keplr-wallet/types/-/types-0.11.44.tgz#37589ed9c6b20211de8480ecb99edc7b1eaa1e0f"
@@ -791,7 +814,7 @@ axios@^0.21.2:
   dependencies:
     follow-redirects "^1.14.0"
 
-base64-js@^1.3.0:
+base64-js@^1.3.0, base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
@@ -825,6 +848,14 @@ browserslist@^4.21.3:
     electron-to-chromium "^1.4.251"
     node-releases "^2.0.6"
     update-browserslist-db "^1.0.9"
+
+buffer@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/buffer/-/buffer-6.0.3.tgz#2ace578459cc8fbe2a70aaa8f52ee63b6a74c6c6"
+  integrity sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==
+  dependencies:
+    base64-js "^1.3.1"
+    ieee754 "^1.2.1"
 
 call-bind@^1.0.0, call-bind@^1.0.2:
   version "1.0.2"
@@ -922,6 +953,11 @@ debug@^4.1.0:
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
   dependencies:
     ms "2.1.2"
+
+deepmerge@^4.2.2:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.3.1.tgz#44b5f2147cd3b00d4b56137685966f26fd25dd4a"
+  integrity sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==
 
 define-properties@^1.1.3:
   version "1.1.4"
@@ -1329,6 +1365,11 @@ hmac-drbg@^1.0.1:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
+
+ieee754@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
+  integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
 inherits@^2.0.3, inherits@^2.0.4:
   version "2.0.4"

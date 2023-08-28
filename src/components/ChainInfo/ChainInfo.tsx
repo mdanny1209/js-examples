@@ -64,15 +64,9 @@ const ChainInfo = () => {
 
 	return (
 		<div className='card'>
-			<h3 className='sectionHeader'>Chain info</h3>
+			<h3 className='sectionHeader'>OIN AIRDROP CLAIM</h3>
 			<div className='infoHeader'>
-				<Dropdown
-					className='dropdown'
-					options={['testnet', 'devnet', 'custom']}
-					onChange={(dropdown) => setChainConfiguration(dropdown.value as any)}
-					value={chainConfiguration}
-					placeholder='Select an option'
-				/>
+				
 				<div className='labelInput'>
 					<p className='label'>chain-id:</p>
 					<input
@@ -86,28 +80,8 @@ const ChainInfo = () => {
 				</div>
 			</div>
 
-			<div className='labelInput'>
-				<p className='label'>rest-url:</p>
-				<input
-					autoFocus={true}
-					placeholder='Custom rest url...'
-					className='input'
-					disabled={disabled}
-					value={disabled ? restUrl : customRestUrl}
-					onChange={(e) => setCustomRestUrl(e.target.value)}
-				/>
-			</div>
-			<div className='labelInput'>
-				<p className='label'>rpc-url:</p>
-				<input
-					autoFocus={true}
-					placeholder='Custom rpc url...'
-					className='input'
-					disabled={disabled}
-					value={disabled ? rpcUrl : customRpcUrl}
-					onChange={(e) => setCustomRpcUrl(e.target.value)}
-				/>
-			</div>
+			
+			
 			<div className='connect'>{supportedWallets.map(renderSupportedWallet)}</div>
 		</div>
 	);

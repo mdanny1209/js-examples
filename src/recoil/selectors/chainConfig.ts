@@ -8,15 +8,15 @@ export const selectedChainConfigSelector = selector<ChainConfiguration>({
 		const selectedChainConfig = get(selectedChainConfigAtom);
 		if (selectedChainConfig === 'testnet') {
 			return {
-				chainId: 'atlantic-2',
-				restUrl: 'https://rest.atlantic-2.seinetwork.io/',
-				rpcUrl: 'https://rpc.atlantic-2.seinetwork.io/'
+				chainId: 'pacific-1',
+				restUrl: 'https://sei-api.polkachu.com/',
+				rpcUrl: 'https://sei-rpc.polkachu.com/'
 			};
 		} else if (selectedChainConfig === 'devnet') {
 			return {
-				chainId: 'sei-devnet-3',
-				restUrl: 'https://rest.sei-devnet-3.seinetwork.io/',
-				rpcUrl: 'https://rpc.sei-devnet-3.seinetwork.io/'
+				chainId: 'pacific-1',
+				restUrl: 'https://sei-api.polkachu.com/',
+				rpcUrl: 'https://sei-rpc.polkachu.com/'
 			};
 		}
 
