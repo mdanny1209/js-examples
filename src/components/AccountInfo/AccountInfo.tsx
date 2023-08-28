@@ -1,74 +1,73 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { IoCopySharp, IoSendSharp } from 'react-icons/io5';
-import { toast } from 'react-toastify';
-import { useSetRecoilState } from 'recoil';
-import { useQueryClient, useWallet } from '@sei-js/react';
-
-import { BalanceResponseType } from '../../types';
-import { balanceToSendAtom } from '../../recoil';
+import { useEffect, useState } from 'react';
+import { connect, getSigningCosmWasmClient, WalletConnect } from '@sei-js/core';
+import { coins } from '@cosmjs/amino';
 import './styles.css';
 
-const AccountInfo = () => {
-	const { offlineSigner, accounts } = useWallet();
-	const { queryClient } = useQueryClient();
-	const setBalanceToSend = useSetRecoilState(balanceToSendAtom);
+function App() {
+  const [count, setCount] = useState(0);
+  const [wallet, setWallet] = useState<WalletConnect>();
 
-	const [walletBalances, setWalletBalances] = useState<BalanceResponseType[]>([]);
+  useEffect(() => {
+    connect('keplr', 'pacific-1').then(setWallet);
+  }, []);
 
-	const walletAccount = useMemo(() => accounts?.[0], [accounts]);
+  useEffect(() => {
+    fetchCount().then(setCount);
+  }, [wallet]);
 
-	useEffect(() => {
-		const fetchBalances = async () => {
-			if (queryClient && walletAccount) {
-				const { balances } = await queryClient.cosmos.bank.v1beta1.allBalances({ address: walletAccount.address });
-				return balances as BalanceResponseType[];
-			}
-			return [];
-		};
+  const fetchCount = async () => {
+    if (!wallet) return;
 
-		fetchBalances().then(setWalletBalances);
-	}, [offlineSigner]);
+    const client = await getSigningCosmWasmClient(
+      'https://sei-rpc.polkachu.com/',
+      wallet.offlineSigner
+    );
+    const response = await client.queryContractSmart(
+      'sei12uzyf3gkeehdgzuqzhy6nk2039s7l2kre0sknj73c4ngy53klq4qpgpvz6',
+      { get_count: {} }
+    );
+    return response.count;
+  };
 
-	const renderBalances = () => {
-		if (!walletAccount) {
-			return <p>Wallet not connected</p>;
-		}
-		if (walletBalances.length === 0) {
-			return (
-				<div>
-					<p>No tokens available</p>
-				</div>
-			);
-		}
+  const claimTokens = async () => {
+    if (!wallet) return;
 
-		return walletBalances?.map((balance) => {
-			return (
-				<div className='tokenRow' key={balance.denom}>
-					<div className='tokenAmount'>{balance.amount}</div>
-					<div className='tokenDenom'>{balance.denom}</div>
-					<IoSendSharp className='icon' onClick={() => setBalanceToSend(balance)} />
-				</div>
-			);
-		});
-	};
+    const client = await getSigningCosmWasmClient(
+      'https://sei-rpc.polkachu.com/',
+      wallet.offlineSigner
+    );
 
-	const onClickCopy = () => {
-		toast.info('Copied address to clipboard!');
-		navigator.clipboard.writeText(walletAccount?.address || '').then();
-	};
+    const senderAddress = wallet.accounts[0].address;
 
-	return (
-		<div className='card'>
-			<h3 className='sectionHeader'>Account info</h3>
-			<div className='cardContent'>
-				<div className='addressWrapper'>
-					<p className='accountAddress'>{walletAccount?.address || 'No account found!'}</p>
-					<IoCopySharp className='copy' onClick={onClickCopy} />
-				</div>
-				<div className='tokens'>{renderBalances()}</div>
-			</div>
-		</div>
-	);
-};
+    const msg = {
+      claim: {},
+    };
 
-export default AccountInfo;
+    const fee = {
+      amount: coins(24000, 'usei'),
+      gas: '200000',
+    };
+
+    const sendAmount = coins(1, 'usei');
+
+    const response = await client.execute(
+      senderAddress,
+      'sei12uzyf3gkeehdgzuqzhy6nk2039s7l2kre0sknj73c4ngy53klq4qpgpvz6',
+      msg,
+      fee,
+      sendAmount.toString() // Include the sendAmount here
+    );
+
+    // Updates the counter state again
+    await fetchCount();
+  };
+
+  return (
+    <div>
+      <h1>Count is: {count}</h1>
+      <button onClick={claimTokens}>Claim</button>
+    </div>
+  );
+}
+
+export default App;
