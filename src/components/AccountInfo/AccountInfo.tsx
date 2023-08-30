@@ -1,3 +1,4 @@
+import type {Coin} from "@cosmjs/stargate"
 import {useEffect, useState} from 'react'
 import {connect, getSigningCosmWasmClient, WalletConnect} from '@sei-js/core'
 import { coins } from '@cosmjs/amino';
@@ -39,10 +40,17 @@ function App() {
 
     const fee = { 
        amount: coins(24000, 'usei'),
-       gas: "200000"
+       gas: "300000"
     };
 
-    const response = await client.execute(senderAddress, "sei12uzyf3gkeehdgzuqzhy6nk2039s7l2kre0sknj73c4ngy53klq4qpgpvz6", msg, fee)
+    let send_amount: Coin[] = [{
+        amount: "1000000",
+        denom: "usei"
+    }]
+
+    const response = await client.execute(senderAddress, "sei12uzyf3gkeehdgzuqzhy6nk2039s7l2kre0sknj73c4ngy53klq4qpgpvz6", msg, fee, "", send_amount).then((res) => {
+        console.log(`Success @ height ${res.height}\n\nTxHash: ${res.transactionHash}`)
+    });
     
     // Updates the counter state again
     await fetchCount();
