@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cosmjs/cosmwasm": "^0.25.6",
+    "@cosmjs/stargate": "^0.31.1",
     "@keplr-wallet/provider": "^0.12.21",
     "@sei-js/react": "^1.2.1",
     "react": "^18.2.0",
